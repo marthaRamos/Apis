@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+      crossorigin="anonymous"
+    />
+
+    <title>indicadores</title>
+  </head>
+
+  <body>
+    <div class="container my-5 text-center">
+      <button class="btn btn-danger w-100" onclick="traer()">Obtener el valor del UF</button>
+      
+      <div class="mt-5" id="contenido"></div>
+    </div>
+
+    <div class="container my-5 text-center">
+      <button class="btn btn-danger w-100" onclick="traer2()">Obtener el valor del Dolar</button>
+      <div class="mt-5" id="contenido2"></div>
+    </div>
+
+    <div class="container my-5 text-center">
+      <button class="btn btn-danger w-100" onclick="traer3()">Obtener el valor del UTM</button>
+      <div class="mt-5" id="contenido3"></div>
+    </div>
+
+
+    <div class="container p-5">
+      <form action="" class="card card-body">
+        <div class="form-group">
+          <label for="saldo">Ingrese su rut para consultar el saldo actual : </label>
+          <input type="text" class="form-control" name="saldo" id="saldo" placeholder="rut" />
+        </div>
+        <br />
+
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" onclick="consultar()">Consultar Saldo</button>
+          <div class="mt-5" id="resultadoSaldo"></div>
+        </div>
+      </form>
+     
+    </div>
+
+
+
+    <div class="container p-5">
+      
+      <form  target="" action="" class="card card-body">
+        <div class="form-group">
+          <label for="cuentaP">Ingrese el número de cuenta personal :</label>
+          <input type="text" class="form-control"  name="cuentaP" id="cuentaP" placeholder="Número personal" />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="cuentaT">Ingrese la cuenta a transferir</label>
+          <input type="text" class="form-control" name="cuentaT" id="cuentaT" placeholder="Número de tercero transferir" />
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="monto">Ingrese el monto a transferir: </label>
+          <input type="text" class="form-control" name="monto" id="monto" placeholder="Ingrese monto" />
+        </div>
+        <br />
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" onclick="mostrar()">Transferir</button>
+          <div class="mt-5" id="resultadtransferencia"></div>
+        </div>
+      </form>
+      <br>
+      
+    </div>
+
+    <script>
+      var resultadtransferencia = document.querySelector('#resultadtransferencia')
+      function mostrar() {
+          fetch('dates.json')
+          .then(res => res.json())
+          .then(data => {
+              console.log(data.operacion)
+              resultadtransferencia.innerHTML = `<p> El pdf : ${data.operacion} </p>`
+   
+          })
+      }
+    </script>
+    
+
+
+
+    <script>
+      var resultadoSaldo = document.querySelector('#resultadoSaldo')
+      function consultar() {
+       fetch('dates.json')
+       .then(res => res.json())
+       .then(data =>{
+         console.log(data)
+       })
+      }
+         
+    </script>
+
+
+
+
+
+
+    <script>
+      var contenido3 = document.querySelector('#contenido3')
+      function traer3() {
+          fetch('https://mindicador.cl/api')
+          .then(res => res.json())
+          .then(data => {
+              console.log(data.uf)
+            contenido3.innerHTML = `<p> El UTM esta a : ${data.utm.valor} </p>
+            <p>  ${data.utm.unidad_medida} </p>
+            <p>  ${data.utm.fecha} </p>
+            `
+          })
+      }
+    </script>
+
+
+
+    <script>
+      var contenido2 = document.querySelector('#contenido2')
+      function traer2() {
+          fetch('https://mindicador.cl/api')
+          .then(res => res.json())
+          .then(data => {
+              console.log(data.uf)
+            contenido2.innerHTML = `<p> El Dolar esta a : ${data.dolar.valor} </p>
+            <p>  ${data.dolar.unidad_medida} </p>
+            <p>  ${data.dolar.fecha} </p>
+            `
+          })
+      }
+    </script>
+
+    <script>
+      var contenido = document.querySelector('#contenido')
+      function traer() {
+          fetch('https://mindicador.cl/api')
+          .then(res => res.json())
+          .then(data => {
+              console.log(data.uf)
+            contenido.innerHTML = `<p> El Uf esta a : ${data.uf.valor} </p>
+            <p>  ${data.uf.unidad_medida} </p>
+            <p>  ${data.uf.fecha} </p>
+            `
+          })
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "cliente": [
+    {
+      "id": "1",
+      "rut": "25571129",
+      "nombre": "Jose",
+      "apellido": "Colmenarez",
+      "saldo": "60000"
+    }
+  ],
+  "operacion": [
+    {
+      "id": "0cc5c11f-032e-4ac6-a3ca-b0bbba620437",
+      "cuentaP": "24456773",
+      "cuentaT": "34456705",
+      "monto": 40000
+    }
+  ]
+}
